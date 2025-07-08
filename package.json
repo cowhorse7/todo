@@ -1,8 +1,8 @@
 {
-  "name": "fhss-starter-app",
+  "name": "rebecca-todo-app",
   "version": "0.0.0",
   "scripts": {
-    "dev":"ng serve",
+    "dev": "ng serve",
     "build": "ng build",
     "test": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "start:prod": "npm run build && node dist/server/server.mjs",
