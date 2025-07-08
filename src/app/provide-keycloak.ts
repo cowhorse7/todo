@@ -55,7 +55,7 @@ const provideKeycloakInAppInitializer = (
 export function provideKeycloakSSR(): EnvironmentProviders {
   const keycloak = new Keycloak({
     url: 'http://localhost:8080',
-    realm: 'starter',
+    realm: 'todo',
     clientId: 'frontend',
   });
 
