@@ -5,12 +5,19 @@ import {
   ForbiddenPage,
   NotFoundPage,
 } from '@fhss-web-team/frontend-utils';
+import { ByuLayout } from './layouts/byu/byu.layout';
 import { HomePage } from './pages/home/home.page';
+import { ListsPage } from './pages/lists/lists.page';
 
 export const routes: Routes = [
   { path: 'forbidden', component: ForbiddenPage },
   { path: 'auth-callback', component: AuthCallbackPage },
   { path: 'auth-error', component: AuthErrorPage },
-  { path: '', pathMatch: 'full', component: HomePage }, // Change this to be the home page
+  { path: '', component: ByuLayout, 
+    children: [
+      {path: '', component: HomePage},
+      {path: 'lists', component: ListsPage}
+    ], 
+  },
   { path: '**', component: NotFoundPage },
 ];

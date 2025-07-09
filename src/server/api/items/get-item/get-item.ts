@@ -10,8 +10,8 @@ const getItemInput = z.object({
 const getItemOutput = z.object({
   id: z.number(),
   name: z.string(),
-  details: z.string(),
-  dueDate: z.date(),
+  details: z.string().nullable(),
+  dueDate: z.date().nullable(),
   completed: z.boolean(),
 });
 

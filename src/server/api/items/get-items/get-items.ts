@@ -11,9 +11,9 @@ const getItemsInput = createTableQueryInputSchema([], {});
 
 const getItemsOutput = createTableQueryOutputSchema({
   name: z.string(),
-  details: z.string(),
+  details: z.string().optional(),
   completed: z.string(),
-  dueDate: z.string(),
+  dueDate: z.string().optional(),
 });
 
 export const getItems = publicProcedure
@@ -31,9 +31,9 @@ export const getItems = publicProcedure
       data: data.map((item) => ({
         id: item.id,
         name: item.name,
-        details: item.details,
+        details: item.details?.toString(),
         completed: item.completed.toString(),
-        dueDate: item.dueDate.toDateString()
+        dueDate: item.dueDate?.toDateString()
       })),
     };
   });

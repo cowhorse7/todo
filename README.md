@@ -1,6 +1,3 @@
-# FHSS Starter App
-_When starting a new project repo in GitHub, use this repository as the template._
+# To Do App
 
-This is the starter app for FHSS web applications. 
-
-For instructions on how to get started developing, or in-depth documentation on functionality and relevant technologies, go to the [Docs Repo](https://github.com/FHSS-Web-Team/Documentation)
+This app is for me to train on the technologies I am meant to be using at work. It is meant to be simple, but effective in allowing a user to make to-do items, as well as track, categorize, and edit (or delete) those items.

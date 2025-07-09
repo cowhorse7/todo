@@ -1,3 +1,6 @@
+import { updateItem } from './items/update-item/update-item'
+import { deleteItem } from './items/delete-item/delete-item'
+import { createItem } from './items/create-item/create-item'
 import { getItem } from './items/get-item/get-item'
 import { getItems } from './items/get-items/get-items'
 import { router } from './trpc';
@@ -11,6 +14,9 @@ export const appRouter = router({
   items: {
     getItems,
     getItem,
+    createItem,
+    deleteItem,
+    updateItem,
   },
   userManagement: {
     createUser,

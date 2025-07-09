@@ -57,11 +57,21 @@ model User {
 }
 
 model Item {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  details   String?
+  dueDate   DateTime?
+  completed Boolean
+  list      List      @relation(fields: [listId], references: [id], onDelete: Restrict)
+  listId    Int
+}
+
+model List {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
-  details   String
-  dueDate   DateTime
-  completed Boolean
+  items     Item[]
 }
