@@ -1,6 +1,6 @@
 import { DummyFunction } from "@fhss-web-team/backend-utils";
 import z from "zod/v4";
-import { itemService } from "../../services/item/item.service";
+import { itemService } from "../../../services/item/item.service";
 
 const inputSchema = z.object({ 
   name: z.string(),

@@ -1,6 +1,6 @@
 import { DummyFunction } from "@fhss-web-team/backend-utils";
-import { prisma } from "../../../../prisma/client";
-import { itemService } from "../../services/item/item.service";
+import { prisma } from "../../../../../prisma/client";
+import { itemService } from "../../../services/item/item.service";
 
 export const deleteItems: DummyFunction = {
   name: "Delete items",
