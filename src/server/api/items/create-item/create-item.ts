@@ -1,13 +1,12 @@
 
 import { z } from 'zod';
-import { prisma, Prisma } from '../../../../../prisma/client';
 import { authenticatedProcedure, publicProcedure } from '../../trpc';
 import { itemService } from '../../../services/item/item.service';
 
 const createItemInput = z.object({
     name: z.string(),
-    details: z.string().optional(),
-    dueDate: z.date().optional(),
+    details: z.string().nullable(),
+    dueDate: z.date().nullable(),
     completed: z.boolean(),
     listId: z.number()
   });
@@ -19,6 +18,6 @@ export const createItem = publicProcedure
   .input(createItemInput)
   .output(createItemOutput)
   .mutation(async (opts) => {
-    return await itemService.createItem(opts.input.name);
+    await itemService.createItem(opts.input);
   });
   
