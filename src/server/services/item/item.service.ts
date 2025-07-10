@@ -6,7 +6,12 @@ import { Item, prisma } from '../../../../prisma/client';
 })
 class ItemService {
 
-  constructor() { }
+  public async getItems(listId: number){
+    return await prisma.item.findMany({
+      where: {listId: listId},
+      orderBy:{dueDate: 'asc'},
+    });
+  }
 
   public async createItem( data: {
     name: string,

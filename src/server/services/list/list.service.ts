@@ -6,7 +6,12 @@ import { List, prisma } from '../../../../prisma/client';
 })
 class ListService {
 
-  constructor() { }
+  public async getLists(){
+    return await prisma.list.findMany({
+      orderBy:{name: 'asc'},
+      
+    });
+  }
 
   public async createList( data: {
     name: string

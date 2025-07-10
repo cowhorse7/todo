@@ -1,6 +1,6 @@
-import { deleteItems } from "./functions/delete-items";
-import { createList } from "./functions/create-list";
-import { createItem } from "./functions/create-item";
+import { deleteItems } from "./functions/items/delete-items";
+import { createList } from "./functions/lists/create-list";
+import { createItem } from "./functions/items/create-item";
 import { createUser } from "./functions/users/create-user.js";
 import { createUsers } from "./functions/users/create-users.js";
 import { deleteUsers } from "./functions/users/delete-users.js";
