@@ -1,6 +1,7 @@
 
 import { z } from 'zod/v4';
 import { authenticatedProcedure, publicProcedure } from '../../trpc';
+import { listService } from '../../../services/list/list.service';
 
 const createListInput = z.object({
   userId: z.string(),
@@ -14,5 +15,5 @@ export const createList = publicProcedure
   .input(createListInput)
   .output(createListOutput)
   .mutation(async (opts) => {
-    // Your logic goes here
+    await listService.createList(opts.input);
   });
