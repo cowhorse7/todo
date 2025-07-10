@@ -1,3 +1,4 @@
+import { deleteLists } from "./functions/lists/delete-lists";
 import { deleteItems } from "./functions/items/delete-items";
 import { createList } from "./functions/lists/create-list";
 import { createItem } from "./functions/items/create-item";
@@ -13,4 +14,5 @@ export const dummyFunctions: DummyFunction[] = [
 	createItem,
 	createList,
 	deleteItems,
+	deleteLists,
 ];

@@ -54,6 +54,7 @@ model User {
   ///////////////////
 
   // Additional fields can be added below
+  lists List[]
 }
 
 model Item {
@@ -64,7 +65,7 @@ model Item {
   details   String?
   dueDate   DateTime?
   completed Boolean
-  list      List      @relation(fields: [listId], references: [id], onDelete: Restrict)
+  list      List      @relation(fields: [listId], references: [id], onDelete: Cascade)
   listId    Int
 }
 
@@ -74,4 +75,6 @@ model List {
   updatedAt DateTime @updatedAt
   name      String
   items     Item[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }
