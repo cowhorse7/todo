@@ -6,7 +6,10 @@ const inputSchema = z.object({
   name: z.string(),
   details: z.string().nullable(),
   dueDate: z.preprocess(
-    (val) => typeof val === 'string' && val !== '' ? new Date(val) : null,
+    (val)  => {
+      if (typeof val === 'string' && val.trim() !== '') return new Date(val);
+      return null;
+    },
     z.date().nullable()
   ),
   completed: z.preprocess(
