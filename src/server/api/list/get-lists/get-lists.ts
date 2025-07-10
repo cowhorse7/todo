@@ -4,7 +4,7 @@ import { authenticatedProcedure, publicProcedure } from '../../trpc';
 import { listService } from '../../../services/list/list.service';
 
 const getListsInput = z.object({
-  userId: z.uuid(),
+  userId: z.string(),
 });
 
 const listSchema = z.object({

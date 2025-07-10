@@ -3,7 +3,7 @@ import { z } from 'zod/v4';
 import { authenticatedProcedure, publicProcedure } from '../../trpc';
 
 const createListInput = z.object({
-  userId: z.uuid(),
+  userId: z.string(),
   name: z.string(),
 });
 

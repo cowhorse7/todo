@@ -4,7 +4,7 @@ import { listService } from "../../../services/list/list.service";
 
 const inputSchema = z.object({ 
   name: z.string(),
-  userId: z.uuid(),
+  userId: z.string(),
 });
 
 export const createList: DummyFunction<typeof inputSchema> = {

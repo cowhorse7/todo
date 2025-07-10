@@ -75,6 +75,6 @@ model List {
   updatedAt DateTime @updatedAt
   name      String
   items     Item[]
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [netId], onDelete: Cascade)
   userId    String
 }
