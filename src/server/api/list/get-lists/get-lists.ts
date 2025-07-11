@@ -8,7 +8,11 @@ const getListsInput = z.object({
 });
 
 const listSchema = z.object({
-  name: z.string()
+  name: z.string(),
+  id: z.number(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  userId: z.string()
 });
 
 const getListsOutput = z.array(listSchema);

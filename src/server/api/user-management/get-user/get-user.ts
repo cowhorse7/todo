@@ -5,7 +5,7 @@ import { authenticatedProcedure, publicProcedure } from '../../trpc';
 import { prisma } from '../../../../../prisma/client';
 
 const getUserInput = z.object({
-  userId: z.string(),
+  userId: z.uuid(),
 });
 
 const getUserOutput = z.object({
