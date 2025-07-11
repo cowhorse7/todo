@@ -1,7 +1,8 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { listService } from '../../../server/services/list/list.service';
 import { AuthService } from '@fhss-web-team/frontend-utils';
-import { User } from '../../../../prisma/client';
+import { List } from '../../../../prisma/client';
+import { userService } from '../../../server/services/user/user';
 
 @Component({
   selector: 'app-lists',
@@ -10,19 +11,16 @@ import { User } from '../../../../prisma/client';
   styleUrl: './lists.page.scss'
 })
 export class ListsPage implements OnInit {
-  currentUser: User|null = null;
-  lists: string[] = [];
+  currentUserId: string|undefined = undefined;
+  lists: List[] = [];
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.authService.userId(user => {
-      this.currentUser = user;
-      lists = signal(listService.getLists());
-    })
+  async ngOnInit(): Promise<void> {
+    this.currentUserId = this.authService.userId();
+    if(this.currentUserId !== undefined){
+      this.currentUserId = await userService.getNetIdByUserId(this.currentUserId);
+      this.lists = await listService.getLists(this.currentUserId);
+    }
   }
-  
-  
-
-  getLists(){}
 }

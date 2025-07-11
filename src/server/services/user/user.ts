@@ -129,7 +129,14 @@ class UserService {
     await keycloakApi.deleteUser(user.keycloakId);
     return user;
   }
+
+  public async getNetIdByUserId(userId: string): Promise<string> {
+    const user = await prisma.user.findUnique({where: {id: userId} });
+    if (!user) throw new Error('User not found');
+    return user.netId;
+  }
 }
+
 
 /**
  * A service for managing site user data.

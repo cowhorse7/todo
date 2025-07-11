@@ -1,1 +1,12 @@
-<p>lists works!</p>
+@if(currentUserId == undefined){
+  <span>Please log in to see your to-do lists!</span>
+}
+@else {
+  @for(list of lists; track list){
+    <div>
+      <h3>{{list.name}}</h3>
+    </div>
+  } @empty {
+    <span>No items found</span>
+  }
+}
