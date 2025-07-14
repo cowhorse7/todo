@@ -18,11 +18,9 @@ export class ListsPage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.currentUserId = this.authService.userId();
-    console.log('currentUserId at init:', this.currentUserId);
 
     if(this.currentUserId !== undefined){
-      this.currentUserId = (await this.trpc.userManagement.getUser.query({userId: this.currentUserId})).netId;
-      this.lists = await this.trpc.list.getLists.mutate({userId: this.currentUserId});
+      this.lists = await this.trpc.list.getLists.mutate();
     }
   }
 }

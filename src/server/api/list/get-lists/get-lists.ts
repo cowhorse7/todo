@@ -3,9 +3,7 @@ import { z } from 'zod/v4';
 import { authenticatedProcedure, publicProcedure } from '../../trpc';
 import { listService } from '../../../services/list/list.service';
 
-const getListsInput = z.object({
-  userId: z.string(),
-});
+const getListsInput = z.undefined();
 
 const listSchema = z.object({
   name: z.string(),
@@ -17,10 +15,10 @@ const listSchema = z.object({
 
 const getListsOutput = z.array(listSchema);
 
-export const getLists = publicProcedure 
-  .meta({ allowedRoles: [] })
+export const getLists = authenticatedProcedure 
+  .meta({ allowedRoles: ['user'] })
   .input(getListsInput)
   .output(getListsOutput)
   .mutation(async (opts) => {
-    return await listService.getLists(opts.input.userId);
+    return await listService.getLists(opts.ctx.user.username);
   });
