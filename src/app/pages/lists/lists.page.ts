@@ -61,4 +61,5 @@ export class ListsPage implements OnInit {
     this.trpc.items.updateItem.mutate({itemId: item.id, completed: newCompletedValue});
   }
 
+  //To-Dos: add task, edit task (details/name), delete task, add list, delete list
 }
