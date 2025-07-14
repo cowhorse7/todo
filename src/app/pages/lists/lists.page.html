@@ -5,7 +5,21 @@
   <div id="lists">
   @for(list of lists; track list){
     <div class="list-table">
-      <h3 (click)="toggleList(list.id)">{{list.name}}</h3>
+      <span><mat-icon (click)="toggleEditing(list.id)">edit</mat-icon><h3 (click)="toggleList(list.id)">{{list.name}}</h3></span>
+      @if(editingListId === list.id){
+        <mat-icon (click)="toggleEditing(list.id)">cancel</mat-icon>
+        <form (ngSubmit)="editList(list.id, list.name)">
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="list.name"
+              name="list-{{ list.id }}"
+            />
+          </mat-form-field>
+          <button type="submit">Update</button>
+        </form>
+      }
       @if(isListOpen(list.id)){
         <table>
           <tr>
