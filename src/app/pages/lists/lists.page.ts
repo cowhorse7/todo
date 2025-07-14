@@ -4,6 +4,7 @@ import { Item, Prisma } from '../../../../prisma/client';
 import { TRPCService } from '../../trpc.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 type List = Prisma.ListGetPayload<{
   include: {items: true};
@@ -11,7 +12,7 @@ type List = Prisma.ListGetPayload<{
 
 @Component({
   selector: 'app-lists',
-  imports: [MatCheckboxModule, FormsModule],
+  imports: [MatCheckboxModule, FormsModule, CommonModule],
   templateUrl: './lists.page.html',
   styleUrl: './lists.page.scss'
 })

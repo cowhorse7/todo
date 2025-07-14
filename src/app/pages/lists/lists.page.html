@@ -15,7 +15,7 @@
         @for(item of list.items; track item){
           <tr>
             <td>{{item.name}}</td>
-            <td>{{item.dueDate}}</td>
+            <td>{{item.dueDate | date: 'short'}}</td>
             <td>
               <!-- {{item.completed}}</td> -->
               <mat-checkbox [checked]="item.completed" (change)="onItemCheckChange(item, $event.checked)"></mat-checkbox>
