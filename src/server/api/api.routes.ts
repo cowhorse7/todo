@@ -1,3 +1,4 @@
+import { deleteList } from './list/delete-list/delete-list'
 import { createList } from './list/create-list/create-list'
 import { getLists } from './list/get-lists/get-lists'
 import { updateItem } from './items/update-item/update-item'
@@ -16,6 +17,7 @@ export const appRouter = router({
   list: {
     getLists,
     createList,
+    deleteList,
   },
   items: {
     getItems,
