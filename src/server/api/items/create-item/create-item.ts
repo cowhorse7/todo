@@ -1,6 +1,6 @@
 
 import { z } from 'zod';
-import { authenticatedProcedure, publicProcedure } from '../../trpc';
+import { authenticatedProcedure } from '../../trpc';
 import { itemService } from '../../../services/item/item.service';
 
 const createItemInput = z.object({
@@ -13,8 +13,8 @@ const createItemInput = z.object({
 
 const createItemOutput = z.void();
 
-export const createItem = publicProcedure
-  .meta({ allowedRoles: [] })
+export const createItem = authenticatedProcedure
+  .meta({ allowedRoles: ['user'] })
   .input(createItemInput)
   .output(createItemOutput)
   .mutation(async (opts) => {

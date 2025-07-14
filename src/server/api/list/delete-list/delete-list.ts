@@ -1,16 +1,18 @@
 
-import { z } from 'zod';
-import { Prisma } from '../../../../../prisma/client';
+import { z } from 'zod/v4';
 import { authenticatedProcedure } from '../../trpc';
+import { listService } from '../../../services/list/list.service';
 
-const deleteListInput = z.null();
+const deleteListInput = z.object({
+  listId: z.number()
+});
 
 const deleteListOutput = z.void();
 
 export const deleteList = authenticatedProcedure
-  .meta({ allowedRoles: [] })
+  .meta({ allowedRoles: ['user'] })
   .input(deleteListInput)
   .output(deleteListOutput)
   .mutation(async (opts) => {
-    // Your logic goes here
+    await listService.deleteList(opts.input.listId);
   });

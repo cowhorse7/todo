@@ -28,5 +28,25 @@ class ItemService {
       const item = await prisma.item.delete({ where: { id: itemId } });
       return item;
     }
+
+  public async updateItem(data: {
+    itemId: number,
+    name?: string,
+    details?: string,
+    dueDate?: Date,
+    completed?: boolean,
+    listId?: number
+  }){
+    return await prisma.item.update({
+      where: {id: data.itemId}, 
+      data:{
+        name: data?.name,
+        details: data?.details,
+        dueDate: data?.dueDate,
+        completed: data?.completed,
+        listId: data?.listId,
+      }
+    });
+  }
 }
 export const itemService = new ItemService();

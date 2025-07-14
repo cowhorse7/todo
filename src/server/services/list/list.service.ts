@@ -25,5 +25,17 @@ class ListService {
     const list = await prisma.list.delete({ where: { id: listId } });
     return list;
   }
+
+  public async updateList(data: {
+    listId: number,
+    name: string,
+  }){
+    return await prisma.list.update({
+      where: {id: data.listId}, 
+      data:{
+        name: data.name,
+      }
+    });
+  }
 }
 export const listService = new ListService();
