@@ -2,8 +2,9 @@
   <span>Please log in to see your to-do lists!</span>
 }
 @else {
+  <div id="lists">
   @for(list of lists; track list){
-    <div>
+    <div class="list-table">
       <h3 (click)="toggleList(list.id)">{{list.name}}</h3>
       @if(isListOpen(list.id)){
         <table>
@@ -30,4 +31,5 @@
   } @empty {
     <span>No lists found</span>
   }
+</div>
 }
