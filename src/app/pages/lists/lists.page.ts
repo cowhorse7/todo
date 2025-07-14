@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '@fhss-web-team/frontend-utils';
-import { Prisma } from '../../../../prisma/client';
+import { Item, Prisma } from '../../../../prisma/client';
 import { TRPCService } from '../../trpc.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 type List = Prisma.ListGetPayload<{
   include: {items: true};
@@ -9,7 +11,7 @@ type List = Prisma.ListGetPayload<{
 
 @Component({
   selector: 'app-lists',
-  imports: [],
+  imports: [MatCheckboxModule, FormsModule],
   templateUrl: './lists.page.html',
   styleUrl: './lists.page.scss'
 })
@@ -39,5 +41,10 @@ export class ListsPage implements OnInit {
 
   isListOpen(listId:number): boolean {
     return this.activeLists.has(listId);
+  }
+
+  onItemCheckChange(item: Item, newCompletedValue: boolean){
+    item.completed = newCompletedValue;
+    //add in trpc call to update item
   }
 }

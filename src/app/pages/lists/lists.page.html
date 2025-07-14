@@ -6,13 +6,25 @@
     <div>
       <h3 (click)="toggleList(list.id)">{{list.name}}</h3>
       @if(isListOpen(list.id)){
-        <ul>
+        <table>
+          <tr>
+            <th>Task</th>
+            <th>Due Date</th>
+            <th>Completed?</th>
+          </tr>
         @for(item of list.items; track item){
-          <li>{{item.name}}</li>          
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.dueDate}}</td>
+            <td>
+              <!-- {{item.completed}}</td> -->
+              <mat-checkbox [checked]="item.completed" (change)="onItemCheckChange(item, $event.checked)"></mat-checkbox>
+            </td>
+          </tr>        
         }@empty {
           <span>No items found</span>
         }
-        </ul>
+        </table>
       }
     </div>
   } @empty {
