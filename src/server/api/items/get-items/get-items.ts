@@ -15,8 +15,8 @@ const itemSchema = z.object({
 
 const getItemsOutput = z.array(itemSchema);
 
-export const getItems = publicProcedure
-  .meta({ allowedRoles: [] })
+export const getItems = authenticatedProcedure
+  .meta({ allowedRoles: ['user'] })
   .input(getItemsInput)
   .output(getItemsOutput)
   .mutation(async (opts) => {

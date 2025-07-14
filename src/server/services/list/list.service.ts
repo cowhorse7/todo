@@ -10,6 +10,7 @@ class ListService {
     return await prisma.list.findMany({
       where: {userId: userId},
       orderBy:{name: 'asc'},
+      include:{items: true},
     });
   }
 

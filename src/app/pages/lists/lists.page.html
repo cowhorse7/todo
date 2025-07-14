@@ -4,9 +4,18 @@
 @else {
   @for(list of lists; track list){
     <div>
-      <h3>{{list.name}}</h3>
+      <h3 (click)="toggleList(list.id)">{{list.name}}</h3>
+      @if(isListOpen(list.id)){
+        <ul>
+        @for(item of list.items; track item){
+          <li>{{item.name}}</li>          
+        }@empty {
+          <span>No items found</span>
+        }
+        </ul>
+      }
     </div>
   } @empty {
-    <span>No items found</span>
+    <span>No lists found</span>
   }
 }
