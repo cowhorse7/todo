@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Item, prisma } from '../../../../prisma/client';
+import { TRPCError } from '@trpc/server';
 
 @Injectable({
   providedIn: 'root'
 })
 class ItemService {
+
+  public async getItem(itemId: number){
+    const item = await prisma.item.findUnique({ where: { id: itemId } });
+        if (!item) {
+          throw new TRPCError({ code: 'NOT_FOUND' });
+        }
+        return item;
+  }
 
   public async getItems(listId: number){
     return await prisma.item.findMany({

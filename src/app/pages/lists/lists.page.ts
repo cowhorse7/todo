@@ -58,7 +58,7 @@ export class ListsPage implements OnInit {
 
   onItemCheckChange(item: Item, newCompletedValue: boolean){
     item.completed = newCompletedValue;
-    //add in trpc call to update item
+    this.trpc.items.updateItem.mutate({itemId: item.id, completed: newCompletedValue});
   }
 
 }

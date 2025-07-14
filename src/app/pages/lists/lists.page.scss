@@ -5,6 +5,7 @@ h3{
 table, th, td{
   border: 1px solid black;
   border-collapse: collapse;
+  cursor: default;
 }
 #lists{
   display: flex;
@@ -13,4 +14,10 @@ table, th, td{
 span{
   display: flex;
   align-items: center;
+}
+mat-icon{
+  cursor: pointer;
+}
+button{
+  cursor: pointer;
 }

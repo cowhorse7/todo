@@ -15,7 +15,7 @@ const updateItemInput = z.object({
 const updateItemOutput = z.void();
 
 export const updateItem = authenticatedProcedure
-  .meta({ allowedRoles: [] })
+  .meta({ allowedRoles: ['user'] })
   .input(updateItemInput)
   .output(updateItemOutput)
   .mutation(async (opts) => {
