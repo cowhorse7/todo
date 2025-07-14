@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '@fhss-web-team/frontend-utils';
 import { Item, Prisma } from '../../../../prisma/client';
 import { TRPCService } from '../../trpc.service';
@@ -25,6 +25,8 @@ export class ListsPage implements OnInit {
   lists: List[] = [];
   activeLists: Set<number> = new Set();
   editingListId: number | null = null;
+  addingList: boolean = false;
+  newListName = signal<string|null>(null);
 
   constructor(private authService: AuthService) {}
 
@@ -61,5 +63,15 @@ export class ListsPage implements OnInit {
     this.trpc.items.updateItem.mutate({itemId: item.id, completed: newCompletedValue});
   }
 
-  //To-Dos: add task, edit task (details/name), delete task, add list, delete list
+  toggleAddingList(){
+    if(this.addingList === false){
+      this.addingList = true;
+    } else{
+      this.addingList = false;
+    }
+  }
+
+  addList(){}
+
+  //To-Dos: add task, edit task (details/name/list assignment/due date), delete task, add list, delete list
 }

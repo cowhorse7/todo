@@ -2,7 +2,21 @@
   <span>Please log in to see your to-do lists!</span>
 }
 @else {
-  <button>Add List</button>
+  <button (click)="toggleAddingList()">Add List</button>
+  @if(addingList == true){
+    <mat-icon (click)="toggleAddingList()">cancel</mat-icon>
+    <form (ngSubmit)="addList()">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="newListName"
+          name="newList"
+        />
+      </mat-form-field>
+      <button type="submit">Create</button>
+    </form>
+  }
   <div id="lists">
   @for(list of lists; track list){
     <div class="list-table">
