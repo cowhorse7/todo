@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { TRPCService } from '../../trpc.service';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { TRPCError } from '@trpc/server';
 
 @Component({
   selector: 'app-delete-list',
@@ -14,7 +15,11 @@ export class DeleteListComponent {
   readonly dialogRef = inject(MatDialogRef<DeleteListComponent>);
   
   async deleteList(){
+    try{
     await this.trpc.list.deleteList.mutate({listId: this.data.listId});
-    this.dialogRef.close();
+    }catch(err){
+      throw err;
+    }
+    this.dialogRef.close("deleted");
   }
 }

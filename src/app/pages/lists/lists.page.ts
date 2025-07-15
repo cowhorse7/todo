@@ -38,8 +38,12 @@ export class ListsPage implements OnInit {
     this.currentUserId = this.authService.userId();
 
     if(this.currentUserId !== undefined){
-      this.lists = await this.trpc.list.getLists.mutate();
+      await this.getLists();
     }
+  }
+
+  async getLists(){
+    this.lists = await this.trpc.list.getLists.mutate();
   }
 
   toggleEditing(listId: number){
@@ -81,6 +85,7 @@ export class ListsPage implements OnInit {
 
   async addList(){
     await this.trpc.list.createList.mutate({name: this.newListName()});
+    await this.getLists();
   }
 
 
@@ -91,10 +96,13 @@ export class ListsPage implements OnInit {
   }
 
   openDeleteModal(listId: number){
-    this.dialog.open(DeleteListComponent, {
+    const dialogRef = this.dialog.open(DeleteListComponent, {
       data: {listId: listId}
     });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if(result){
+        await this.getLists();
+      }
+    })
   }
-
-  //To-Dos: add task, edit task (details/name/list assignment/due date), delete task
 }
