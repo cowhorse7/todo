@@ -77,4 +77,6 @@ model List {
   items     Item[]
   user      User     @relation(fields: [userId], references: [netId], onDelete: Cascade)
   userId    String
+
+  @@unique([name, userId])
 }

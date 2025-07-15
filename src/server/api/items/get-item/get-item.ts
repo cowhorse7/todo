@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { authenticatedProcedure } from '../../trpc';
 import { itemService } from '../../../services/item/item.service';
 
@@ -12,6 +12,9 @@ const getItemOutput = z.object({
   details: z.string().nullable(),
   dueDate: z.date().nullable(),
   completed: z.boolean(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  listId: z.number(),
 });
 
 export const getItem = authenticatedProcedure

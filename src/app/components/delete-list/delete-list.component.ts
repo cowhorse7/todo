@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TRPCService } from '../../trpc.service';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { TRPCError } from '@trpc/server';
 
 @Component({
   selector: 'app-delete-list',
@@ -18,6 +17,7 @@ export class DeleteListComponent {
     try{
     await this.trpc.list.deleteList.mutate({listId: this.data.listId});
     }catch(err){
+      console.log("an error occurred when attempting to delete the list");
       throw err;
     }
     this.dialogRef.close("deleted");

@@ -47,7 +47,7 @@
           </tr>
         @for(item of list.items; track item){
           <tr>
-            <td (click)="openTaskModal(item.id)">{{item.name}}</td>
+            <td (click)="openTaskModal(list.id, item.id)">{{item.name}}</td>
             <td>{{item.dueDate | date: 'short'}}</td>
             <td>
               <mat-checkbox [checked]="item.completed" (change)="onItemCheckChange(item, $event.checked)"></mat-checkbox>
@@ -58,7 +58,7 @@
           <span>No items found</span>
         }
         </table>
-        <button (click)="openTaskModal()">Add Task</button><button (click)="openDeleteModal(list.id)">Delete List</button>
+        <button (click)="openTaskModal(list.id)">Add Task</button><button (click)="openDeleteModal(list.id)">Delete List</button>
       }
     </div>
   } @empty {

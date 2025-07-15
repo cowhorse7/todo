@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from '../../components/add-task/add-task.component';
 import { DeleteListComponent } from '../../components/delete-list/delete-list.component';
 
@@ -85,13 +85,14 @@ export class ListsPage implements OnInit {
 
   async addList(){
     await this.trpc.list.createList.mutate({name: this.newListName()});
+    this.toggleAddingList();
     await this.getLists();
   }
 
 
-  openTaskModal(itemId?: number){
+  openTaskModal(listId: number, itemId?: number){
     this.dialog.open(AddTaskComponent, {
-      data: {itemId: itemId}
+      data: {listId: listId, itemId: itemId}
     });
   }
 
