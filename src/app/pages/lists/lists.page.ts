@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AddTaskComponent } from '../../components/add-task/add-task.component';
+import { DeleteListComponent } from '../../components/delete-list/delete-list.component';
 
 type List = Prisma.ListGetPayload<{
   include: {items: true};
@@ -27,6 +30,7 @@ export class ListsPage implements OnInit {
   editingListId: number | null = null;
   addingList: boolean = false;
   newListName = signal<string>("");
+  readonly dialog = inject(MatDialog);
 
   constructor(private authService: AuthService) {}
 
@@ -75,9 +79,14 @@ export class ListsPage implements OnInit {
     this.trpc.list.createList.mutate({name: this.newListName()});
   }
 
-  deleteList(listId: number){
-    this.trpc.list.deleteList.mutate({listId: listId});
+
+  openTaskModal(){
+    this.dialog.open(AddTaskComponent);
   }
 
-  //To-Dos: add task, edit task (details/name/list assignment/due date), delete task, delete list
+  openDeleteModal(){
+    this.dialog.open(DeleteListComponent);
+  }
+
+  //To-Dos: add task, edit task (details/name/list assignment/due date), delete task
 }
