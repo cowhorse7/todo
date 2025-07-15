@@ -62,9 +62,9 @@ export class ListsPage implements OnInit {
     return this.activeLists.has(listId);
   }
 
-  onItemCheckChange(item: Item, newCompletedValue: boolean){
+  async onItemCheckChange(item: Item, newCompletedValue: boolean){
     item.completed = newCompletedValue;
-    this.trpc.items.updateItem.mutate({itemId: item.id, completed: newCompletedValue});
+    await this.trpc.items.updateItem.mutate({itemId: item.id, completed: newCompletedValue});
   }
 
   toggleAddingList(){
@@ -75,8 +75,12 @@ export class ListsPage implements OnInit {
     }
   }
 
-  addList(){
-    this.trpc.list.createList.mutate({name: this.newListName()});
+  async deleteTask(itemId: number){
+    await this.trpc.items.deleteItem.mutate({id: itemId});
+  }
+
+  async addList(){
+    await this.trpc.list.createList.mutate({name: this.newListName()});
   }
 
 
