@@ -1,1 +1,14 @@
-<p>add-task works!</p>
+@if(data.itemId){
+  <h2 mat-dialog-title>Edit Task</h2>
+} @else {
+  <h2 mat-dialog-title>New Task</h2>
+}
+<mat-dialog-content>
+  <p>
+    Deleting this list will also delete all tasks inside it. 
+    Restoration will not be possible.
+  </p>
+  <mat-dialog-actions>
+    <button mat-dialog-close>Close</button><button>Save</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

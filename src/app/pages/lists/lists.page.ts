@@ -84,12 +84,16 @@ export class ListsPage implements OnInit {
   }
 
 
-  openTaskModal(){
-    this.dialog.open(AddTaskComponent);
+  openTaskModal(itemId?: number){
+    this.dialog.open(AddTaskComponent, {
+      data: {itemId: itemId}
+    });
   }
 
-  openDeleteModal(){
-    this.dialog.open(DeleteListComponent);
+  openDeleteModal(listId: number){
+    this.dialog.open(DeleteListComponent, {
+      data: {listId: listId}
+    });
   }
 
   //To-Dos: add task, edit task (details/name/list assignment/due date), delete task
