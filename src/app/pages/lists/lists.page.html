@@ -5,16 +5,18 @@
   <button (click)="toggleAddingList()">Add List</button>
   @if(addingList == true){
     <mat-icon (click)="toggleAddingList()">cancel</mat-icon>
-    <form (ngSubmit)="addList()">
+    <form (ngSubmit)="addList()" #formRef="ngForm">
       <mat-form-field>
+        <mat-label>name of new list</mat-label>
         <input
           matInput
           type="text"
           [(ngModel)]="newListName"
+          [required]="true"
           name="newList"
         />
       </mat-form-field>
-      <button type="submit">Create</button>
+      <button type="submit" [disabled]="formRef.invalid">Create</button>
     </form>
   }
   <div id="lists">
@@ -56,7 +58,7 @@
           <span>No items found</span>
         }
         </table>
-        <button>Add Task</button><button>Delete List</button>
+        <button>Add Task</button><!--have this open a detail-entry box--><button (click)="deleteList(list.id)">Delete List</button> <!--make this open a confirmation box-->
       }
     </div>
   } @empty {

@@ -6,7 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormField } from '@angular/material/form-field';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 type List = Prisma.ListGetPayload<{
@@ -15,7 +15,7 @@ type List = Prisma.ListGetPayload<{
 
 @Component({
   selector: 'app-lists',
-  imports: [MatCheckboxModule, FormsModule, CommonModule, MatIconModule, MatFormField, MatInputModule],
+  imports: [MatCheckboxModule, FormsModule, CommonModule, MatIconModule, MatFormField, MatInputModule, MatLabel],
   templateUrl: './lists.page.html',
   styleUrl: './lists.page.scss'
 })
@@ -26,7 +26,7 @@ export class ListsPage implements OnInit {
   activeLists: Set<number> = new Set();
   editingListId: number | null = null;
   addingList: boolean = false;
-  newListName = signal<string|null>(null);
+  newListName = signal<string>("");
 
   constructor(private authService: AuthService) {}
 
@@ -71,7 +71,13 @@ export class ListsPage implements OnInit {
     }
   }
 
-  addList(){}
+  addList(){
+    this.trpc.list.createList.mutate({name: this.newListName()});
+  }
 
-  //To-Dos: add task, edit task (details/name/list assignment/due date), delete task, add list, delete list
+  deleteList(listId: number){
+    this.trpc.list.deleteList.mutate({listId: listId});
+  }
+
+  //To-Dos: add task, edit task (details/name/list assignment/due date), delete task, delete list
 }
