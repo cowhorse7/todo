@@ -1,14 +1,44 @@
-@if(data.itemId){
+  @if(data.itemId){
   <h2 mat-dialog-title>Edit Task</h2>
 } @else {
   <h2 mat-dialog-title>New Task</h2>
 }
 <mat-dialog-content>
-  <p>
-    Deleting this list will also delete all tasks inside it. 
-    Restoration will not be possible.
-  </p>
+  <form id="task-form" (ngSubmit)="submitForm()">
+    <mat-form-field>
+      <mat-label>Task Name</mat-label>
+      <input
+        matInput
+        type="text"
+        name="nameInput"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Details?</mat-label>
+      <textarea
+        matInput
+        type="text"
+        name="detailInput"
+        [ngModel]="details()"
+        (ngModelChange)="details.set($event)"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Due Date?</mat-label>
+      <input
+        matInput
+        type="datetime-local"
+        name="dateInput"
+        [ngModel]="due()"
+        (ngModelChange)="due.set($event)"
+      />
+    </mat-form-field>
+      <mat-checkbox [checked]="completed()" (change)="completed.set($event.checked)">Completed?</mat-checkbox>
+  </form>
   <mat-dialog-actions>
-    <button mat-dialog-close>Close</button><button>Save</button>
+    <button mat-dialog-close>Cancel</button><button form="task-form">Save</button>
   </mat-dialog-actions>
 </mat-dialog-content>

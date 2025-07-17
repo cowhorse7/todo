@@ -81,6 +81,7 @@ export class ListsPage implements OnInit {
 
   async deleteTask(itemId: number){
     await this.trpc.items.deleteItem.mutate({id: itemId});
+    await this.getLists();
   }
 
   async addList(){
@@ -91,9 +92,14 @@ export class ListsPage implements OnInit {
 
 
   openTaskModal(listId: number, itemId?: number){
-    this.dialog.open(AddTaskComponent, {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
       data: {listId: listId, itemId: itemId}
     });
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if(result){
+        await this.getLists();
+      }
+    })
   }
 
   openDeleteModal(listId: number){

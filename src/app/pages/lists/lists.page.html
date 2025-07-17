@@ -34,7 +34,7 @@
               name="list-{{ list.id }}"
             />
           </mat-form-field>
-          <button type="submit">Update</button>
+          <button type="submit" (click)="toggleEditing(list.id)">Update</button>
         </form>
       }
       @if(isListOpen(list.id)){
